@@ -47,21 +47,3 @@ an unchanged game will be returned.
 
 
 
-export const makeMove = (game, pos) => {
-  const currentPlayer = game.state === 'plr1' ? 1 : 2;
-  const newBoard = game.board.map((box, index) => pos === index ? currentPlayer : box);
-  const winningPattern = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-  ];
-  const winningPath = winningPattern.find(path => path.every(value => newBoard[value] === currentPlayer));
-  const winner = !!winningPath ? currentPlayer : 0;
-
-  return {winner, board: newBoard, state: game.state === 'plr1' ? 'plr2' : 'plr1'};
-};
